@@ -1,5 +1,6 @@
 name: devfest
 description: A new Flutter project.
+version: 1.0.0+1
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -11,7 +12,6 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -19,54 +19,93 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  intl: ^0.16.0
   cupertino_icons: ^0.1.2
+  flutter_svg: ^0.14.1
+  firebase_core: ^0.4.0+9
+  firebase_analytics: ^5.0.2
+  cloud_firestore: ^0.12.9+5
+  cached_network_image: ^1.1.2+1
+  provider: ^3.1.0+1
+  shared_preferences: ^0.5.3+5
+  url_launcher: ^5.2.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
+  # To add asset to your application, add an asset section, like this:
   assets:
-   - assets/images/devfest.png
-  #  - images/a_dot_ham.jpeg
+    - asset/image/cover/devfest_cover_day.png
+    - asset/image/cover/devfest_cover_night.png
+    - asset/image/cover/profile_cover_day.png
+    - asset/image/cover/profile_cover_night.png
+    - asset/image/popal.jpg
+    - asset/image/ratib.jpg
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
+    - asset/svg/moon.svg
+    - asset/svg/agenda.svg
+    - asset/svg/home.svg
+    - asset/svg/organizer.svg
+    - asset/svg/speakers.svg
+    - asset/svg/sponsors.svg
+    - asset/svg/chevron_up.svg
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
+    - asset/svg/facebook.svg
+    - asset/svg/instagram.svg
+    - asset/svg/email.svg
+    - asset/svg/meetup.svg
+    - asset/svg/twitter.svg
+    - asset/svg/website.svg
+    - asset/svg/gitHub.svg
+    - asset/svg/telephone.svg
 
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+    - asset/svg/day_mode.svg
+    - asset/svg/night_mode.svg
+
+    - asset/svg/ai.svg
+    - asset/svg/android.svg
+    - asset/svg/cloud.svg
+    - asset/svg/web.svg
+    - asset/svg/flutter.svg
+
+    - asset/svg/about_us.svg
+    - asset/svg/expand_arrow.svg
+    - asset/svg/gdg.svg
+    - asset/svg/devFest.svg
+    - asset/svg/saawis.svg
+    - asset/svg/gift.svg
+#  - images/a_dot_ham.jpeg
+# An image asset can refer to one or more resolution-specific "variants", see
+# https://flutter.dev/asset-and-images/#resolution-aware.
+# For details regarding adding asset from package dependencies, see
+# https://flutter.dev/asset-and-images/#from-packages
+# To add custom fonts to your application, add a fonts section here,
+# in this "flutter" section. Each entry in this list should have a
+# "family" key with the font family name, and a "fonts" key with a
+# list giving the asset and other descriptors for the font. For
+# example:
+# fonts:
+#   - family: Schyler
+#     fonts:
+#       - asset: fonts/Schyler-Regular.ttf
+#       - asset: fonts/Schyler-Italic.ttf
+#         style: italic
+#   - family: Trajan Pro
+#     fonts:
+#       - asset: fonts/TrajanPro.ttf
+#       - asset: fonts/TrajanPro_Bold.ttf
+#         weight: 700
+#
+# For details regarding fonts from package dependencies,
+# see https://flutter.dev/custom-fonts/#from-packages

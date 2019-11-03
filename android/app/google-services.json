@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "434331330541",
+    "firebase_url": "https://gdgkabul-devfest.firebaseio.com",
+    "project_id": "gdgkabul-devfest",
+    "storage_bucket": "gdgkabul-devfest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434331330541:android:6da5236be9550e234d29e4",
+        "android_client_info": {
+          "package_name": "com.saawis.devfest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "434331330541-g54q3cb21qvsl7atrl8fs6cfphgqfe30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV2aJcmEpTc5MNpx-7-TMkcU2IO6GIXEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "434331330541-g54q3cb21qvsl7atrl8fs6cfphgqfe30.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
