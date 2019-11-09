@@ -24,7 +24,7 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
       now.year,
       now.month,
       now.day,
-      days <= 0 ? eventTime.hour : 24,
+      days <= 0 ? eventTime.hour : eventTime.hour + 24,
     ).difference(now).inHours;
 
     minuts = DateTime(
@@ -32,7 +32,7 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
       now.month,
       now.day,
       now.hour,
-      days <= 0 && hours <= 0 ? eventTime.minute : 60,
+      days <= 0 && hours <= 0 ? eventTime.minute + 60 : 60,
     ).difference(now).inMinutes;
 
     seconds = DateTime(
@@ -46,7 +46,7 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
   }
 
   bool timeOutVisibity() {
-    var diffSec = eventTime.difference(DateTime.now()).inSeconds;
+    var diffSec = eventTime.difference(DateTime.now()).inSeconds - 1;
     // print("Diff: $diffSec");
     bool visibility = diffSec >= 0;
     return visibility;
@@ -78,32 +78,28 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: timeOutVisibity(),
-      child: Container(
+      child: Padding(
         padding: EdgeInsets.only(top: 8),
-        child: Center(
-          child: Container(
-            width: 220,
-            height: 35,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: Colors.blue,
-                border:
-                    Border.all(color: Color.fromARGB(40, 0, 0, 0), width: 2)),
-            child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _buildText(value: days, name: "Days"),
-                  _buildDot(),
-                  _buildText(value: hours, name: "Hours"),
-                  _buildDot(),
-                  _buildText(value: minuts, name: "Minuts"),
-                  _buildDot(),
-                  _buildText(value: seconds, name: "Seconds"),
-                ],
-              ),
+        child: Container(
+          width: 220,
+          height: 38,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              color: Colors.blue,
+              border: Border.all(color: Color.fromARGB(40, 0, 0, 0), width: 2)),
+          child: Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildText(value: days, name: "Days"),
+                _buildDot(),
+                _buildText(value: hours, name: "Hours"),
+                _buildDot(),
+                _buildText(value: minuts, name: "Minuts"),
+                _buildDot(),
+                _buildText(value: seconds, name: "Seconds"),
+              ],
             ),
           ),
         ),
@@ -113,6 +109,7 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
 
   Column _buildText({int value, String name}) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
           value.toString(),

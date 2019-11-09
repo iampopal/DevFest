@@ -54,7 +54,7 @@ class PersonWidget extends StatelessWidget {
                     child: Opacity(
                       opacity: 0.75,
                       child: Container(
-                        margin: EdgeInsets.all(5.9),
+                        margin: EdgeInsets.all(asset != null ? 6 : 5.9),
                         height: 100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(Sizes.cardRound),
@@ -78,15 +78,16 @@ class PersonWidget extends StatelessWidget {
                         Text(
                           person.firstName,
                           style: Theme.of(context).textTheme.body1.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14),
                         ),
                         Text(
                           person.lastName,
                           style: Theme.of(context).textTheme.body1.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ),
                         ),
                         Text(

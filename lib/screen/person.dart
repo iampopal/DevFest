@@ -7,7 +7,6 @@ import 'package:devfest/widget/backButton.dart';
 import 'package:devfest/widget/photoHero.dart';
 import 'package:devfest/widget/socialMedia.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class PersonScreen extends StatelessWidget {
@@ -46,7 +45,7 @@ class PersonScreen extends StatelessWidget {
       children: <Widget>[
         Container(
           width: double.infinity,
-          height: 300,
+          height: 306,
           child: Image.asset(pref.isDarkTheme
               ? Assets.img.profileCoverNight
               : Assets.img.profileCoverDay),
@@ -106,7 +105,7 @@ class PersonScreen extends StatelessWidget {
 
   _buildSocialLinks(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         _buildSocialWidget(
             context: context,
@@ -158,7 +157,7 @@ class PersonScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(Sizes.cardRound),
         onTap: onTap,
         child: SizedBox(
-          width: 70,
+          width: 85,
           height: 60,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -169,7 +168,9 @@ class PersonScreen extends StatelessWidget {
               ),
               Text(
                 name,
-                style: Theme.of(context).textTheme.button,
+                style: Theme.of(context).textTheme.button.copyWith(
+                      color: color,
+                    ),
               )
             ],
           ),

@@ -124,13 +124,13 @@ class _AgendaPageState extends State<AgendaPage> {
     }
 
     return ListView(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.all(21),
       children: <Widget>[
         _buildList(
           context: context,
           agendas: generalList,
           agendaType: AgendaType.General,
-          accentColor: Theme.of(context).accentColor,
+          primaryColor: Theme.of(context).accentColor,
           name: "",
           svgAsset: Assets.svg.web,
         ),
@@ -138,7 +138,7 @@ class _AgendaPageState extends State<AgendaPage> {
           context: context,
           agendas: androidList,
           agendaType: AgendaType.Android,
-          accentColor: Colors.green,
+          primaryColor: Colors.green,
           name: "Android",
           svgAsset: Assets.svg.android,
         ),
@@ -146,7 +146,7 @@ class _AgendaPageState extends State<AgendaPage> {
           context: context,
           agendas: aiList,
           agendaType: AgendaType.Ai,
-          accentColor: Colors.red,
+          primaryColor: Colors.red,
           name: "Artificial Intelligence",
           svgAsset: Assets.svg.ai,
         ),
@@ -154,7 +154,7 @@ class _AgendaPageState extends State<AgendaPage> {
           context: context,
           agendas: flutterList,
           agendaType: AgendaType.Flutter,
-          accentColor: Colors.lightBlue[400],
+          primaryColor: Colors.lightBlue[400],
           name: "Flutter",
           svgAsset: Assets.svg.flutter,
         ),
@@ -162,7 +162,7 @@ class _AgendaPageState extends State<AgendaPage> {
           context: context,
           agendas: cloudList,
           agendaType: AgendaType.Cloud,
-          accentColor: Colors.blue,
+          primaryColor: Colors.blue,
           name: "Google Cloud",
           svgAsset: Assets.svg.cloud,
         ),
@@ -170,7 +170,7 @@ class _AgendaPageState extends State<AgendaPage> {
           context: context,
           agendas: webList,
           agendaType: AgendaType.Web,
-          accentColor: Colors.amber,
+          primaryColor: Colors.amber,
           name: "Web",
           svgAsset: Assets.svg.web,
         ),
@@ -182,7 +182,7 @@ class _AgendaPageState extends State<AgendaPage> {
     BuildContext context,
     List<Agenda> agendas,
     AgendaType agendaType,
-    Color accentColor,
+    Color primaryColor,
     String name,
     String svgAsset,
   }) {
@@ -194,7 +194,7 @@ class _AgendaPageState extends State<AgendaPage> {
             agendaType: agendaType,
             context: context,
             agendas: agendas,
-            accentColor: accentColor,
+            primaryColor: primaryColor,
             svgAsset: svgAsset,
           ),
           Visibility(
@@ -202,7 +202,7 @@ class _AgendaPageState extends State<AgendaPage> {
             child: _buildTitleAgenda(
               context: context,
               name: name,
-              accentColor: accentColor,
+              primaryColor: primaryColor,
               agendaType: agendaType,
               svgAsset: svgAsset,
             ),
@@ -212,35 +212,47 @@ class _AgendaPageState extends State<AgendaPage> {
     );
   }
 
-  Widget _buildEmptyAgenda(String svgAsset) {
-    return Container(
-      width: double.infinity,
-      height: 100,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SvgPicture.asset(
-              svgAsset,
-              width: 50,
-              color: Theme.of(context).disabledColor,
-            ),
-            Text("Stay tuned...")
-          ],
+  Widget _buildEmptyAgenda(String svgAsset, Color accentColor) {
+    return Opacity(
+      opacity: 0.3,
+      child: Container(
+        width: double.infinity,
+        height: 100,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SvgPicture.asset(
+                svgAsset,
+                width: 50,
+                color: accentColor,
+              ),
+              Text(
+                "Stay tuned...",
+                style: Theme.of(context).textTheme.button.copyWith(
+                      color: accentColor,
+                      fontWeight: FontWeight.normal,
+                    ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  _buildListAgenda(
-      {AgendaType agendaType,
-      BuildContext context,
-      List<Agenda> agendas,
-      Color accentColor,
-      String svgAsset}) {
+  _buildListAgenda({
+    AgendaType agendaType,
+    BuildContext context,
+    List<Agenda> agendas,
+    Color primaryColor,
+    String svgAsset,
+  }) {
     bool isEmpty = agendas.length == 0;
 
     return Visibility(
+      maintainAnimation: true,
+      maintainState: true,
       visible: agendaType == AgendaType.General || isAgendaEnable(agendaType),
       child: Container(
         padding:
@@ -253,12 +265,12 @@ class _AgendaPageState extends State<AgendaPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12.0),
           child: isEmpty
-              ? _buildEmptyAgenda(svgAsset)
+              ? _buildEmptyAgenda(svgAsset, primaryColor)
               : Column(
                   children: List.generate(agendas.length, (i) {
                     return AgendaWidtet(
                       agenda: agendas[i],
-                      accentColor: accentColor,
+                      accentColor: primaryColor,
                     );
                   }),
                 ),
@@ -270,7 +282,7 @@ class _AgendaPageState extends State<AgendaPage> {
   _buildTitleAgenda(
       {BuildContext context,
       String name,
-      Color accentColor,
+      Color primaryColor,
       AgendaType agendaType,
       String svgAsset}) {
     return GestureDetector(
@@ -302,7 +314,7 @@ class _AgendaPageState extends State<AgendaPage> {
                       child: SvgPicture.asset(
                         svgAsset,
                         width: 19,
-                        color: accentColor,
+                        color: primaryColor,
                       ),
                     ),
                     Padding(
@@ -312,7 +324,7 @@ class _AgendaPageState extends State<AgendaPage> {
                         style: Theme.of(context)
                             .textTheme
                             .button
-                            .apply(color: accentColor),
+                            .apply(color: primaryColor),
                       ),
                     ),
                   ],
@@ -326,7 +338,7 @@ class _AgendaPageState extends State<AgendaPage> {
                   child: SvgPicture.asset(
                     Assets.svg.expand_arrow,
                     width: 21,
-                    color: accentColor,
+                    color: primaryColor,
                   ),
                 ),
               )

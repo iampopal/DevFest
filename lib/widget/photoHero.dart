@@ -38,7 +38,9 @@ class PhotoHeroWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                   imageUrl: person.picUrl ?? "",
                   placeholder: (context, url) {
-                    return _buildEmptyPerson();
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
                   },
                   errorWidget: (context, url, error) {
                     return _buildEmptyPerson();

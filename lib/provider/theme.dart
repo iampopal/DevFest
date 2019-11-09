@@ -1,14 +1,9 @@
+import 'package:devfest/data/assets.dart';
 import 'package:flutter/material.dart';
 
 class ThemeNotifier extends ChangeNotifier {
-  final _primaryTheme = ThemeData(
-    textTheme: TextTheme(
-      title: TextStyle(fontSize: 28),
-      button: TextStyle(fontSize: 14),
-    ),
-  );
-
   final darkTheme = ThemeData(
+    fontFamily: Fonts.googleSans,
     primarySwatch: Colors.grey,
     primaryColor: Colors.black,
     brightness: Brightness.dark,
@@ -16,6 +11,9 @@ class ThemeNotifier extends ChangeNotifier {
     backgroundColor: Colors.black,
     accentColor: Colors.white,
     cardColor: Colors.grey[900],
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.grey[900],
+    ),
     accentIconTheme: IconThemeData(color: Colors.black),
     primaryIconTheme: IconThemeData(color: Colors.white),
     dividerColor: Colors.grey[800],
@@ -29,6 +27,7 @@ class ThemeNotifier extends ChangeNotifier {
   );
 
   final lightTheme = ThemeData(
+    fontFamily: Fonts.googleSans,
     primarySwatch: Colors.grey,
     primaryColor: Colors.white,
     brightness: Brightness.light,

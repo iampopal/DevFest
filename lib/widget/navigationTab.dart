@@ -34,7 +34,7 @@ class NavigationTabWidget extends AnimatedWidget {
       bottom: 0,
       left: !isCurrent ? left : leftTween,
       child: Container(
-        width: 135,
+        width: 150,
         child: _buildBody(),
       ),
     );
@@ -45,9 +45,11 @@ class NavigationTabWidget extends AnimatedWidget {
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
       child: FlatButton(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Sizes.tabRound),
-          side: BorderSide(color: Color.fromARGB(40, 0, 0, 0), width: 2, style: BorderStyle.solid)
-        ),
+            borderRadius: BorderRadius.circular(Sizes.tabRound),
+            side: BorderSide(
+                color: Color.fromARGB(40, 0, 0, 0),
+                width: 2,
+                style: BorderStyle.solid)),
         color: color,
         child: Row(
           mainAxisAlignment:
@@ -56,7 +58,7 @@ class NavigationTabWidget extends AnimatedWidget {
             Visibility(visible: visibleLeftIcon, child: _buildIcon()),
             Text(
               text,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white, fontSize: 15),
             ),
             Visibility(
               visible: !visibleLeftIcon,

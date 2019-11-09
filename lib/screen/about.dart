@@ -6,6 +6,7 @@ import 'package:devfest/widget/backButton.dart';
 import 'package:devfest/widget/navigationTab.dart';
 import 'package:devfest/widget/person.dart';
 import 'package:devfest/widget/socialMedia.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -64,12 +65,24 @@ class _AboutScreenState extends State<AboutScreen>
       child: Row(
         children: <Widget>[
           BackButtonWidget(),
-          SizedBox(
-            width: 300,
-            height: 54,
+          Expanded(
             child: Container(
+              height: 54,
               child: Stack(
-                children: _buildNavigationList(),
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Align(
+                      child: Container(
+                        width: 170,
+                        margin: EdgeInsets.only(right: 54),
+                        child: Stack(
+                          overflow: Overflow.visible,
+                          children: _buildNavigationList(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -78,13 +91,13 @@ class _AboutScreenState extends State<AboutScreen>
     );
   }
 
-  _buildNavigationList() {
+  List<Widget> _buildNavigationList() {
     final saawisTab = NavigationTabWidget(
       animation: _animation,
       asset: Assets.svg.saawis,
       color: Colors.blue,
       isCurrent: _navigationTab == NavigationTab.saawis,
-      left: 40,
+      left: 0,
       onTap: _onNavTap(NavigationTab.saawis),
       text: "Saawis",
       visibleLeftIcon: true,
@@ -95,7 +108,7 @@ class _AboutScreenState extends State<AboutScreen>
       asset: Assets.svg.gdg,
       color: Colors.red,
       isCurrent: _navigationTab == NavigationTab.gdg,
-      left: 85,
+      left: 45,
       onTap: _onNavTap(NavigationTab.gdg),
       text: "GDG Kabul",
       visibleLeftIcon: _navigationTab != NavigationTab.saawis,
@@ -157,25 +170,51 @@ class _AboutScreenState extends State<AboutScreen>
 
   Widget _buildSaawisPage() {
     final textStyle = Theme.of(context).textTheme.body1;
-    return Column(
+    final linkStyle =
+        TextStyle(color: Colors.blue, decoration: TextDecoration.underline);
+    return ListView(
       children: <Widget>[
         SizedBox(height: 18),
-        Text("DevFest Kabul 2019", style: textStyle),
-        Text("Version 1.0", style: textStyle),
+        Center(child: Text("DevFest Kabul 2019", style: textStyle)),
+        Center(child: Text("Version 1.0", style: textStyle)),
         SizedBox(height: 46),
         SvgPicture.asset(
           Assets.svg.gift,
           width: 50,
         ),
-        SizedBox(
-          width: 260,
-          child: Text(
-            "DevFest Kabul 2019 app is developed by Saawis to support DevFest Kabul 2019. It is developed using Flutter and Firebase as an open-source project. You can find the source code here.",
-            style: textStyle,
-            textAlign: TextAlign.center,
+        Center(
+          child: SizedBox(
+            width: 260,
+            child: RichText(
+              textAlign: TextAlign.justify,
+              text: TextSpan(
+                style: textStyle,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "DevFest Kabul 2019 app is developed by ",
+                  ),
+                  TextSpan(
+                      text: "Saawis",
+                      style: linkStyle,
+                      recognizer: TapGestureRecognizer()
+                        ..onTap =
+                            () => UrlUtil.launchURL("https://saawis.com")),
+                  TextSpan(
+                      text:
+                          " to support DevFest Kabul 2019. It is developed using Flutter and Firebase as an open-source project. You can find the source "),
+                  TextSpan(
+                      text: "code here",
+                      style: linkStyle,
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => UrlUtil.launchURL(
+                            "https://github.com/iampopal/DevFest")),
+                  TextSpan(text: ".")
+                ],
+              ),
+            ),
           ),
         ),
-        SizedBox(height: 60),
+        SizedBox(height: 40),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -184,11 +223,16 @@ class _AboutScreenState extends State<AboutScreen>
               asset: Assets.img.popalProfile,
               accentColor: Colors.blue,
               person: Person(
-                  firstName: "Abdurahman",
-                  lastName: "Popal",
-                  position: "Sofware Engineer",
-                  bio:
-                      "Abdurahman popal is Computer Science student at Aria University and Mobile Developer at Saawis and passionate about developing native apps using dart and flutter."),
+                firstName: "Abdurahman",
+                lastName: "Popal",
+                position: "Mobile Developer",
+                bio:
+                    "Abdurahman popal is Computer Science student at Aria University and Mobile Developer at Saawis and passionate about developing native apps using dart and flutter.",
+                facebook: "iampopal",
+                gitHub: "iampopal",
+                twitter: "iampopal",
+                website: "https://popal.dev",
+              ),
             ),
             PersonWidget(
               asset: Assets.img.ratibProfile,

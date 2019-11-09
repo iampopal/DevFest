@@ -33,10 +33,14 @@ class SponsorWidet extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                     border: Border.all(color: Theme.of(context).dividerColor)),
                 padding: EdgeInsets.all(4),
+                width: 55,
+                height: 55,
                 child: CachedNetworkImage(
                   imageUrl: sponsor.logoUrl,
-                  width: 50,
-                  height: 50,
+                  placeholder: (context, url) => Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  fit: BoxFit.contain,
                 ),
               ),
               SizedBox(width: 12),

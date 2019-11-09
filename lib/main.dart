@@ -25,13 +25,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final prefNotifier = Provider.of<PrefNotifier>(context);
     final themeNotifier = Provider.of<ThemeNotifier>(context);
+    final brigtness =
+        prefNotifier.isDarkTheme ? Brightness.light : Brightness.dark;
 
+    //Set Colors
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness:
-              prefNotifier.isDarkTheme ? Brightness.light : Brightness.dark),
+        systemNavigationBarColor:
+            themeNotifier.getTheme(prefNotifier.isDarkTheme).cardColor,
+        systemNavigationBarIconBrightness: brigtness,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: brigtness,
+      ),
     );
+
+    //set Oriantation
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

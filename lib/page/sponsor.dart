@@ -13,13 +13,14 @@ class SponserPage extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
       stream: Database.firebase().collection("sponsor").snapshots(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return CircularProgressIndicator();
+        if (!snapshot.hasData)
+          return Center(child: CircularProgressIndicator());
 
-        List<Sponsor> sponsersList = snapshot.data.documents
+        List<Sponsor> sponsorsList = snapshot.data.documents
             .map((data) => Sponsor.fromFirestore(data))
             .toList();
 
-        return _buildSponsers(context, sponsersList);
+        return _buildSponsers(context, sponsorsList);
       },
     );
   }
@@ -65,13 +66,14 @@ class SponserPage extends StatelessWidget {
 
     return Container(
       child: ListView(
+        padding: EdgeInsets.all(12),
         children: <Widget>[
-          _buildSponsorsList(context, "General", generals),
-          _buildSponsorsList(context, "Diamond", dimonds),
-          _buildSponsorsList(context, "Platinum", platinums),
-          _buildSponsorsList(context, "Golden", goldens),
-          _buildSponsorsList(context, "Silver", silvers),
-          _buildSponsorsList(context, "Associated", associateds),
+          _buildSponsorsList(context, "General Sponsor", generals),
+          _buildSponsorsList(context, "Diamond Sponsor", dimonds),
+          _buildSponsorsList(context, "Platinum Sponsor", platinums),
+          _buildSponsorsList(context, "Golden Sponsor", goldens),
+          _buildSponsorsList(context, "Silver Sponsor", silvers),
+          _buildSponsorsList(context, "Associated Partners", associateds),
         ],
       ),
     );

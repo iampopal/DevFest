@@ -1,7 +1,10 @@
 class Assets {
   static AssetImage img = AssetImage();
   static AssetSvg svg = AssetSvg();
-  f() {}
+}
+
+class Fonts {
+  static String googleSans = "googleSuns";
 }
 
 class AssetImage {
@@ -47,4 +50,8 @@ class AssetSvg {
   String devFestSvg = "asset/svg/devFest.svg";
   String saawis = "asset/svg/saawis.svg";
   String gift = "asset/svg/gift.svg";
+  String attendees18 = "asset/svg/attendees18.svg";
+  String volunteers18 = "asset/svg/volunteers18.svg";
+  String speaker18 = "asset/svg/speaker18.svg";
+  String workshop18 = "asset/svg/workshop18.svg";
 }

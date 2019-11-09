@@ -29,6 +29,7 @@ dependencies:
   provider: ^3.1.0+1
   shared_preferences: ^0.5.3+5
   url_launcher: ^5.2.5
+  # auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +44,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  
+  fonts:
+    - family: googleSuns
+      fonts:
+        - asset: asset/font/googleSansRegular.ttf
 
   # To add asset to your application, add an asset section, like this:
   assets:
@@ -85,6 +91,11 @@ flutter:
     - asset/svg/devFest.svg
     - asset/svg/saawis.svg
     - asset/svg/gift.svg
+
+    - asset/svg/attendees18.svg
+    - asset/svg/speaker18.svg
+    - asset/svg/volunteers18.svg
+    - asset/svg/workshop18.svg
 #  - images/a_dot_ham.jpeg
 # An image asset can refer to one or more resolution-specific "variants", see
 # https://flutter.dev/asset-and-images/#resolution-aware.

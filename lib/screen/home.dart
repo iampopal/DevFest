@@ -6,10 +6,9 @@ import 'package:devfest/page/home.dart';
 import 'package:devfest/page/person.dart';
 import 'package:devfest/widget/navigationTab.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-enum NavigationTab { home, speaker, agenda, sponser, organizer, saawis, gdg }
+enum NavigationTab { home, speaker, agenda, sponsor, organizer, saawis, gdg }
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -113,15 +112,13 @@ class _HomeScreenState extends State<HomeScreen>
     return Center(
       child: Container(
         height: 54,
-        width: 316,
+        width: 330,
         alignment: Alignment.center,
-        child: Center(
-          child: Stack(
-            fit: StackFit.passthrough,
-            alignment: Alignment.center,
-            overflow: Overflow.visible,
-            children: getNavigationList(),
-          ),
+        child: Stack(
+          fit: StackFit.passthrough,
+          alignment: Alignment.center,
+          overflow: Overflow.visible,
+          children: getNavigationList(),
         ),
       ),
     );
@@ -139,15 +136,15 @@ class _HomeScreenState extends State<HomeScreen>
       animation: _animation,
     );
 
-    final sponser = NavigationTabWidget(
-      text: "Sponser",
+    final sponsor = NavigationTabWidget(
+      text: "Sponsor",
       asset: Assets.svg.sponsors,
       color: Colors.amber,
       left: 135,
-      visibleLeftIcon: _navigationTab == NavigationTab.sponser ||
+      visibleLeftIcon: _navigationTab == NavigationTab.sponsor ||
           _navigationTab == NavigationTab.organizer,
-      onTap: _onNavTap(NavigationTab.sponser),
-      isCurrent: _navigationTab == NavigationTab.sponser,
+      onTap: _onNavTap(NavigationTab.sponsor),
+      isCurrent: _navigationTab == NavigationTab.sponsor,
       animation: _animation,
     );
 
@@ -157,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen>
       color: Colors.green,
       left: 90,
       visibleLeftIcon: _navigationTab == NavigationTab.speaker ||
-          _navigationTab == NavigationTab.sponser ||
+          _navigationTab == NavigationTab.sponsor ||
           _navigationTab == NavigationTab.organizer,
       onTap: _onNavTap(NavigationTab.speaker),
       isCurrent: _navigationTab == NavigationTab.speaker,
@@ -171,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen>
       left: 45,
       visibleLeftIcon: _navigationTab == NavigationTab.agenda ||
           _navigationTab == NavigationTab.speaker ||
-          _navigationTab == NavigationTab.sponser ||
+          _navigationTab == NavigationTab.sponsor ||
           _navigationTab == NavigationTab.organizer,
       onTap: _onNavTap(NavigationTab.agenda),
       isCurrent: _navigationTab == NavigationTab.agenda,
@@ -191,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     final homeItems = [
       organizer,
-      sponser,
+      sponsor,
       speaker,
       agenda,
       home,
@@ -199,13 +196,13 @@ class _HomeScreenState extends State<HomeScreen>
 
     switch (_navigationTab) {
       case NavigationTab.agenda:
-        return [organizer, sponser, speaker, home, agenda];
+        return [organizer, sponsor, speaker, home, agenda];
       case NavigationTab.speaker:
-        return [organizer, sponser, home, agenda, speaker];
-      case NavigationTab.sponser:
-        return [organizer, home, agenda, speaker, sponser];
+        return [organizer, sponsor, home, agenda, speaker];
+      case NavigationTab.sponsor:
+        return [organizer, home, agenda, speaker, sponsor];
       case NavigationTab.organizer:
-        return [home, agenda, speaker, sponser, organizer];
+        return [home, agenda, speaker, sponsor, organizer];
       default:
         return homeItems;
     }
@@ -220,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen>
         case NavigationTab.speaker:
           _pageController.jumpToPage(2);
           break;
-        case NavigationTab.sponser:
+        case NavigationTab.sponsor:
           _pageController.jumpToPage(3);
           break;
         case NavigationTab.organizer:
@@ -242,40 +239,37 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildPages() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8),
-      child: PageView(
-        controller: _pageController,
-        onPageChanged: (p) {
-          switch (p) {
-            case 1:
-              _changeNav(NavigationTab.agenda);
-              break;
-            case 2:
-              _changeNav(NavigationTab.speaker);
-              break;
-            case 3:
-              _changeNav(NavigationTab.sponser);
-              break;
-            case 4:
-              _changeNav(NavigationTab.organizer);
-              break;
-            default:
-              _changeNav(NavigationTab.home);
-          }
-        },
-        children: <Widget>[
-          HomePage(),
-          AgendaPage(),
-          PersonPage(
-            personType: PersonType.speaker,
-          ),
-          SponserPage(),
-          PersonPage(
-            personType: PersonType.organizer,
-          ),
-        ],
-      ),
+    return PageView(
+      controller: _pageController,
+      onPageChanged: (p) {
+        switch (p) {
+          case 1:
+            _changeNav(NavigationTab.agenda);
+            break;
+          case 2:
+            _changeNav(NavigationTab.speaker);
+            break;
+          case 3:
+            _changeNav(NavigationTab.sponsor);
+            break;
+          case 4:
+            _changeNav(NavigationTab.organizer);
+            break;
+          default:
+            _changeNav(NavigationTab.home);
+        }
+      },
+      children: <Widget>[
+        HomePage(),
+        AgendaPage(),
+        PersonPage(
+          personType: PersonType.speaker,
+        ),
+        SponserPage(),
+        PersonPage(
+          personType: PersonType.organizer,
+        ),
+      ],
     );
   }
 }
