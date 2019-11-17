@@ -1,6 +1,6 @@
 name: devfest
 description: A new Flutter project.
-version: 1.0.0+1
+version: 1.0.1+4
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -22,15 +22,14 @@ dependencies:
   intl: ^0.16.0
   cupertino_icons: ^0.1.2
   flutter_svg: ^0.14.1
-  firebase_core: ^0.4.0+9
-  firebase_analytics: ^5.0.2
-  cloud_firestore: ^0.12.9+5
+  firebase_messaging: ^5.1.8
+  cloud_firestore: ^0.12.10
   cached_network_image: ^1.1.2+1
   provider: ^3.1.0+1
   shared_preferences: ^0.5.3+5
   url_launcher: ^5.2.5
-  # auto_size_text: ^2.1.0
-
+  flutter_local_notifications: ^0.8.4
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -44,7 +43,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  
+
   fonts:
     - family: googleSuns
       fonts:

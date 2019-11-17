@@ -18,21 +18,31 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
 
   void _updateTime() {
     DateTime now = DateTime.now();
+
     days = eventTime.difference(now).inDays;
 
     hours = DateTime(
       now.year,
       now.month,
       now.day,
-      days <= 0 ? eventTime.hour : eventTime.hour + 24,
+      eventTime.hour,
     ).difference(now).inHours;
+
+    int hoursDiffSeconds = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      eventTime.hour,
+    ).difference(now).inSeconds;
+
+    hours = hours <= 0 && hoursDiffSeconds <= 0 ? hours + 23 : hours;
 
     minuts = DateTime(
       now.year,
       now.month,
       now.day,
       now.hour,
-      days <= 0 && hours <= 0 ? eventTime.minute + 60 : 60,
+      60,
     ).difference(now).inMinutes;
 
     seconds = DateTime(
@@ -41,13 +51,12 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
       now.day,
       now.hour,
       now.minute,
-      days <= 0 && hours <= 0 && minuts <= 0 ? 60 : 60,
+      60,
     ).difference(now).inSeconds;
   }
 
   bool timeOutVisibity() {
     var diffSec = eventTime.difference(DateTime.now()).inSeconds - 1;
-    // print("Diff: $diffSec");
     bool visibility = diffSec >= 0;
     return visibility;
   }
@@ -56,9 +65,8 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
   void initState() {
     _updateTime();
 
-    const oneSec = const Duration(seconds: 1);
     if (timeOutVisibity()) {
-      _timer = new Timer.periodic(oneSec, (t) {
+      _timer = new Timer.periodic(Duration(seconds: 1), (t) {
         setState(() {
           _updateTime();
         });
@@ -86,7 +94,8 @@ class _TimeOutWidgetState extends State<TimeOutWidget> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(18),
               color: Colors.blue,
-              border: Border.all(color: Color.fromARGB(40, 0, 0, 0), width: 2)),
+              border:
+                  Border.all(color: Color.fromARGB(40, 0, 0, 0), width: 2)),
           child: Padding(
             padding: const EdgeInsets.all(2.0),
             child: Row(

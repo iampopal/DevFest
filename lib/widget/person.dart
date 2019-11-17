@@ -54,7 +54,7 @@ class PersonWidget extends StatelessWidget {
                     child: Opacity(
                       opacity: 0.75,
                       child: Container(
-                        margin: EdgeInsets.all(asset != null ? 6 : 5.9),
+                        margin: EdgeInsets.all(6),
                         height: 100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(Sizes.cardRound),

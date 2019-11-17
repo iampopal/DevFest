@@ -11,19 +11,17 @@ class SponsorWidet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 8, left: 8, right: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(34),
-        border: Border.all(
-          color: Theme.of(context).dividerColor,
+    return Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: FlatButton(
+        onPressed: () => UrlUtil.launchURL(sponsor.link),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(34),
+          side: BorderSide(
+            color: Theme.of(context).dividerColor,
+          ),
         ),
-        color: Theme.of(context).cardColor,
-      ),
-      child: InkWell(
-        onTap: () =>
-            sponsor.link == null ? null : UrlUtil.launchURL(sponsor.link),
-        borderRadius: BorderRadius.circular(Sizes.tabRound),
+        padding: EdgeInsets.all(0),
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Row(

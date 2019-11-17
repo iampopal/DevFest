@@ -54,8 +54,8 @@ class PersonScreen extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.only(top: 16, left: 8),
-              child: BackButtonWidget(),
+              padding: const EdgeInsets.only(top: 12, left: 0),
+              child: SafeArea(child: BackButtonWidget()),
             ),
           ),
         ),

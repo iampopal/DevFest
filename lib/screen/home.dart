@@ -7,6 +7,8 @@ import 'package:devfest/page/person.dart';
 import 'package:devfest/widget/navigationTab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 enum NavigationTab { home, speaker, agenda, sponsor, organizer, saawis, gdg }
 
@@ -23,9 +25,105 @@ class _HomeScreenState extends State<HomeScreen>
   AnimationController _animationController;
   Animation<double> _animation;
 
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      new FlutterLocalNotificationsPlugin();
+
+  showNotification({String title, String body}) async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'your channel id',
+      'your channel name',
+      'your channel description',
+      color: Colors.blue,
+      importance: Importance.Max,
+      priority: Priority.High,
+      ticker: 'ticker',
+      // style: AndroidNotificationStyle.BigText,
+    );
+
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin
+        .show(0, title, body, platformChannelSpecifics, payload: "payload1");
+  }
+
+  initNotification() {
+    var initializationSettingsAndroid =
+        new AndroidInitializationSettings('ic_notification');
+    var initializationSettingsIOS = new IOSInitializationSettings(
+        onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+    var initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+  }
+
+  // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+  Future onDidReceiveLocalNotification(
+    int id,
+    String title,
+    String body,
+    String payload,
+  ) async {
+    print("onDidReceiveLocalNotification: $id");
+  }
+
+  Future onSelectNotification(String payload) {
+    print("payLoad: $payload");
+  }
+
+  void initMessaging() {
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        setState(() {
+          print("initMessaging onMessage: $message");
+        });
+        showNotification(
+          title: message['notification']['title'],
+          body: message['notification']['body'],
+        );
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        setState(() {
+          print("initMessaging onLaunch");
+        });
+        showNotification(
+          title: message['notification']['title'],
+          body: message['notification']['body'],
+        );
+      },
+      onResume: (Map<String, dynamic> message) async {
+        setState(() {
+          print("initMessaging on Resume...");
+        });
+        showNotification(
+          title: message['notification']['title'],
+          body: message['notification']['body'],
+        );
+      },
+    );
+    _firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, badge: true, alert: true));
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
+    _firebaseMessaging.getToken().then((String token) {
+      assert(token != null);
+      setState(() {
+        print("Push Messaging token: $token");
+      });
+      print("Ahmmm...");
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    initMessaging();
+    initNotification();
     _pageController = PageController(initialPage: 0, keepPage: false);
     _navigationTab = NavigationTab.home;
 
@@ -53,39 +151,6 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return _buildHome(context);
-  }
-
-  CustomScrollView _buildSliveList() {
-    return CustomScrollView(slivers: <Widget>[
-      // SliverAppBar(
-      //   floating: true,
-      //   snap: true,
-      //   //pinned: true,
-      //   backgroundColor: Colors.transparent,
-      //   flexibleSpace: FlexibleSpaceBar(
-      //     background: Image.asset(
-      //       "assets/devfest.png",
-      //     ),
-      //   ),
-      //   expandedHeight: 113,
-      // ),
-      SliverAppBar(
-        flexibleSpace: FlexibleSpaceBar(
-          background: _buildDevFestImage(context),
-        ),
-        expandedHeight: 113,
-      ),
-      SliverList(
-        delegate: SliverChildListDelegate([
-          //_buildDevFestImage(),
-          _buildNavigationButtons(),
-          Container(
-            height: 470,
-            child: _buildPages(),
-          )
-        ]),
-      )
-    ]);
   }
 
   _buildHome(BuildContext context) {
@@ -137,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen>
     );
 
     final sponsor = NavigationTabWidget(
-      text: "Sponsor",
+      text: "Sponsors",
       asset: Assets.svg.sponsors,
       color: Colors.amber,
       left: 135,

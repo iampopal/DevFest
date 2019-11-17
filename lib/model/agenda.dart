@@ -16,7 +16,7 @@ class Agenda {
       case 1:
         return "Beginner";
       case 3:
-        return "Middle";
+        return "Intermediate";
       case 3:
         return "Advance";
     }

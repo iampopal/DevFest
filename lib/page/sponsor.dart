@@ -73,14 +73,14 @@ class SponserPage extends StatelessWidget {
           _buildSponsorsList(context, "Platinum Sponsor", platinums),
           _buildSponsorsList(context, "Golden Sponsor", goldens),
           _buildSponsorsList(context, "Silver Sponsor", silvers),
-          _buildSponsorsList(context, "Associated Partners", associateds),
+          _buildSponsorsList(context, "Associated Partner", associateds),
         ],
       ),
     );
   }
 
   Widget _buildSponsorsList(
-      BuildContext context, String s, List<Sponsor> list) {
+      BuildContext context, String sponsor, List<Sponsor> list) {
     return Visibility(
       visible: list.length > 0,
       child: Container(
@@ -93,7 +93,7 @@ class SponserPage extends StatelessWidget {
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: Text(s,
+                child: Text(sponsor + (list.length > 1 ? 's' : ''),
                     style: Theme.of(context)
                         .textTheme
                         .body1

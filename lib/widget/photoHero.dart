@@ -25,7 +25,7 @@ class PhotoHeroWidget extends StatelessWidget {
       width: size,
       height: size,
       child: Hero(
-        tag: person.firstName + person.lastName,
+        tag: "pic${person.firstName}",
         child: Card(
           margin: EdgeInsets.all(6),
           elevation: 6,

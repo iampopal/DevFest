@@ -1,3 +1,7 @@
 {
-    "maven.view": "hierarchical"
+    "maven.view": "hierarchical",
+    "cSpell.words": [
+        "firestore"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

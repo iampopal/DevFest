@@ -170,8 +170,12 @@ class _AboutScreenState extends State<AboutScreen>
 
   Widget _buildSaawisPage() {
     final textStyle = Theme.of(context).textTheme.body1;
-    final linkStyle =
-        TextStyle(color: Colors.blue, decoration: TextDecoration.underline);
+    final linkStyle = TextStyle(
+      color: Colors.blue,
+      decoration: TextDecoration.underline,
+      fontWeight: FontWeight.bold,
+    );
+
     return ListView(
       children: <Widget>[
         SizedBox(height: 18),
@@ -201,9 +205,27 @@ class _AboutScreenState extends State<AboutScreen>
                             () => UrlUtil.launchURL("https://saawis.com")),
                   TextSpan(
                       text:
-                          " to support DevFest Kabul 2019. It is developed using Flutter and Firebase as an open-source project. You can find the source "),
+                          " to support DevFest Kabul 2019. It is developed using "),
                   TextSpan(
-                      text: "code here",
+                    text: "Flutter",
+                    style: TextStyle(
+                      color: Colors.lightBlue[400],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextSpan(text: " and "),
+                  TextSpan(
+                    text: "Firebase ",
+                    style: TextStyle(
+                      color: Colors.amber,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextSpan(
+                      text:
+                          "as an open-source project. You can find the source code "),
+                  TextSpan(
+                      text: "here",
                       style: linkStyle,
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => UrlUtil.launchURL(
@@ -227,7 +249,7 @@ class _AboutScreenState extends State<AboutScreen>
                 lastName: "Popal",
                 position: "Mobile Developer",
                 bio:
-                    "Abdurahman popal is Computer Science student at Aria University and Mobile Developer at Saawis and passionate about developing native apps using dart and flutter.",
+                    "Abdurahman is a Mobile Developer at Saawis, He has developed many Android apps that are available on Play store.\nHe is passionate about developing cross platform application using flutter and helping fellow developers at GDG Kabul",
                 facebook: "iampopal",
                 gitHub: "iampopal",
                 twitter: "iampopal",
@@ -241,6 +263,9 @@ class _AboutScreenState extends State<AboutScreen>
                   firstName: "Rateb",
                   lastName: "Ghiasy",
                   position: "Ui & UX Designer",
+                  facebook: "RatebGhiasy",
+                  twitter: "RGhiasy",
+                  instagram: "ratebghiasy",
                   bio:
                       "Rateb Ghiasy is a computer science student in Aria University and a software UI and UX designer in Saawis Software Development Company. The DevFest 2019 event is his first event as a GDG co-organizer."),
             ),
